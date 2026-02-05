@@ -1,3 +1,72 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: ms-technology
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/technology_db
+    username: root
+    password: root
+    pool:
+      initial-size: 10
+      max-size: 20
+      max-idle-time: 30m
+      validation-query: SELECT 1
+
+  # Security JWT Configuration
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY:your-secret-key-change-in-production-min-256-bits-long-key}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000} # 24 horas
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+  show-actuator: false
+  packages-to-scan: com.pragma.technology
+  paths-to-match: /api/v1/**
+
+logging:
+  level:
+    root: INFO
+    com.pragma.technology: DEBUG
+    org.springframework.r2dbc: DEBUG
+    io.r2dbc.mysql: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: ${LOG_FILE:logs/ms-technology.log}
+
+# Application specific configuration
+app:
+  name: Microservicio Tecnología
+  version: 1.0.0
+  description: Gestión de catálogo de tecnologías
+
+validation:
+  max-name-lenght: 50
+  max-description-length: 90
+

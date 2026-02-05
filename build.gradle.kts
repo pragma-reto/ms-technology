@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "4.0.2"
+	id("org.springframework.boot") version "3.3.7"
 	id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -33,10 +33,10 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.6")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.6")
-	implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.7.0")
+	implementation("org.springdoc:springdoc-openapi-starter-webflux-ui:2.6.0")
 	compileOnly("org.projectlombok:lombok")
-	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.asyncer:r2dbc-mysql")
+	runtimeOnly("com.mysql:mysql-connector-j")
 	runtimeOnly("io.micrometer:micrometer-registry-prometheus")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-actuator-test")
